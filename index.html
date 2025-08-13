@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>ilovedodo</title>
     <style>
+        html, body {
+            touch-action: none;
+        }
         body {
             margin: 0;
             min-height: 100vh;
@@ -16,8 +19,11 @@
         }
         @media only screen and (max-width: 600px) {
             body {
-                background: url('https://i.postimg.cc/JzQL1BfX/FED4-D1-DC-919-A-405-E-9138-3-E213911-E9-D4.jpg') no-repeat center center fixed;
+                background: url('https://i.postimg.cc/JzQL1BfX/FED4-D1-DC-919-A-405-E-9138-3-E213911-E9-D4.jpg') no-repeat center center;
                 background-size: cover;
+                background-attachment: scroll; /* مهم للجوال */
+                overflow: hidden; /* يمنع التحريك */
+                height: 100vh;    /* يجعل الصفحة ثابتة */
             }
         }
         .container {
