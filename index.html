@@ -146,8 +146,9 @@
             letter-spacing: 0.25em;
         }
         .custom-message {
-            white-space: normal;
-            overflow: visible;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             width: 100%;
             color: #39ff14;
             font-size: 1em;
@@ -308,7 +309,7 @@
 
         const messages = [
             "Since Day One, I Wanted To Know You More",
-            "You Were The <br>Puddle Of Water In A Barren Desert",
+            "You Were The Puddle Of Water In A Barren Desert",
             "And I Was The Thirsty Wanderer.",
             "I Just Knew That I Found The Love Of My Life.",
             "And Maybe We Had Some Ups And Downs",
