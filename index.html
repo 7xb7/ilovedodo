@@ -33,11 +33,21 @@
                 border-radius: 15px;
             }
             .custom-message {
-                white-space: normal;
+                white-space: nowrap;
+                overflow-x: auto;
+                overflow-y: hidden;
+                width: 100%;
+                max-width: 90vw;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                margin-top: 10px;
+                color: #39ff14;
                 font-size: 0.85em;
                 padding: 10px;
-                margin-top: 10px;
-                line-height: 1.4;
+                box-shadow: 0 2px 8px rgba(0,255,128,0.18);
+                text-align: left;
+                box-sizing: border-box;
             }
             .input {
                 width: 90%;
@@ -110,14 +120,13 @@
             text-shadow: 0 2px 8px #39ff14;
         }
         .custom-message {
-            white-space: normal;
-            overflow: visible;
-            text-overflow: clip;
-            line-height: 1.4;
+            white-space: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;
             width: 100%;
             max-width: 90vw;
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             margin-top: 24px;
             color: #39ff14;
@@ -126,7 +135,7 @@
             border-radius: 10px;
             padding: 15px 20px;
             box-shadow: 0 2px 8px rgba(0,255,128,0.18);
-            text-align: center;
+            text-align: left;
             box-sizing: border-box;
         }
         #noModal {
