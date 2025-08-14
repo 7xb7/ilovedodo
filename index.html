@@ -212,6 +212,12 @@
 .input {
     text-shadow: none !important;
 }
+/* Remove tap highlight and glow on mobile buttons */
+.btn, button, input[type="button"], input[type="submit"] {
+    -webkit-tap-highlight-color: transparent;
+    outline: none !important;
+    box-shadow: none !important;
+}
         .heart {
             position: fixed;
             top: -50px;
