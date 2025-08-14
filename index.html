@@ -212,9 +212,29 @@
 .input {
     text-shadow: none !important;
 }
-/* Remove tap highlight and glow on mobile buttons */
 .btn, button, input[type="button"], input[type="submit"] {
     -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    outline: none !important;
+ 
+    box-shadow: 0 4px 16px rgba(0,255,128,0.25) !important;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .btn, .btn:hover, .btn:active, .btn:focus, .btn:focus-visible {
+        background: #102d1a !important;
+        color: #39ff14 !important;
+        box-shadow: 0 4px 16px rgba(0,255,128,0.25) !important;
+    }
+}
+
+.btn:focus {
     outline: none !important;
     box-shadow: none !important;
 }
