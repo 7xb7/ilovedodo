@@ -31,23 +31,23 @@
                 padding: 15px 10px;
                 font-size: 0.8em;
                 border-radius: 15px;
+                overflow: hidden;
             }
             .custom-message {
-                white-space: nowrap;
-                overflow-x: auto;
-                overflow-y: hidden;
+                white-space: normal;
+                overflow: hidden;
+                text-overflow: ellipsis;
                 width: 100%;
-                max-width: 90vw;
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-                margin-top: 10px;
+                max-width: 100%;
+                display: block;
                 color: #39ff14;
                 font-size: 0.85em;
                 padding: 10px;
                 box-shadow: 0 2px 8px rgba(0,255,128,0.18);
-                text-align: left;
+                text-align: center;
                 box-sizing: border-box;
+                margin-top: 10px;
+                line-height: 1.4;
             }
             .input {
                 width: 90%;
@@ -72,6 +72,19 @@
                 margin-bottom: 10px;
             }
         }
+        @media only screen and (max-width: 320px) {
+            .custom-message {
+                font-size: 0.7em;
+                padding: 5px;
+            }
+            .container {
+                padding: 15px 10px;
+            }
+            .btn {
+                padding: 6px 12px;
+                font-size: 0.8em;
+            }
+        }
         .container {
             background: rgba(10, 31, 20, 0.85);
             box-shadow: 0 8px 32px 0 rgba(0, 255, 128, 0.37);
@@ -85,6 +98,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
         .input {
             width: 90%;
@@ -120,23 +134,22 @@
             text-shadow: 0 2px 8px #39ff14;
         }
         .custom-message {
-            white-space: nowrap;
-            overflow-x: auto;
-            overflow-y: hidden;
+            white-space: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
             width: 100%;
-            max-width: 90vw;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            margin-top: 24px;
+            max-width: 100%;
+            display: block;
             color: #39ff14;
             font-size: 1em;
             background: rgba(57,255,20,0.15);
             border-radius: 10px;
             padding: 15px 20px;
             box-shadow: 0 2px 8px rgba(0,255,128,0.18);
-            text-align: left;
+            text-align: center;
             box-sizing: border-box;
+            margin-top: 24px;
+            line-height: 1.4;
         }
         #noModal {
             display:none;
