@@ -385,6 +385,11 @@
             }, 1000);
         });
 
+        document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('mouseup', () => btn.blur());
+    btn.addEventListener('touchend', () => btn.blur());
+});
+
         function createHeart() {
             const heart = document.createElement('span');
             heart.className = 'heart';
