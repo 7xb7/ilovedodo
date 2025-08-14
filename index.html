@@ -100,7 +100,9 @@
             justify-content: center;
             overflow: hidden;
             transition: width 0.3s ease;
+            position: relative;
         }
+
         .input {
             width: 90%;
             padding: 12px;
@@ -150,21 +152,6 @@
             line-height: 1.4;
             transition: width 0.3s ease;
         }
-        #noModal {
-            display:none;
-            position:fixed;
-            top:50%;
-            left:50%;
-            transform:translate(-50%,-50%);
-            background:rgba(10,31,20,0.95);
-            color:#39ff14;
-            font-size:1.3em;
-            padding:32px 48px;
-            border-radius:16px;
-            box-shadow:0 4px 24px rgba(0,255,128,0.35);
-            z-index:9999;
-            text-align:center;
-        }
         #blackOverlay {
             display: none;
             position: fixed;
@@ -180,6 +167,7 @@
             font-size: 2em;
             font-family: 'Segoe UI', Arial, sans-serif;
             text-align: center;
+            text-shadow: 0 2px 12px #39ff14, 0 0px 2px #000;
         }
         #resetRow {
             color:#39ff14;
@@ -190,11 +178,11 @@
         #changePwd {
             cursor:pointer;
             text-decoration:underline;
+            color: #39ff14;
+            transition: color 0.2s;
         }
-        #noMsg {
-            display:none;
-            margin-left:8px;
-            color:#39ff14;
+        #changePwd:hover {
+            color: #145c1b;
         }
         #finalLoveMsg {
             display: none;
@@ -222,6 +210,29 @@
                 opacity: 0.7;
             }
         }
+        .fade-in {
+            opacity: 0;
+            animation: fadeInAnim 0.7s forwards;
+        }
+        @keyframes fadeInAnim {
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes explode {
+            0% { opacity: 1; transform: scale(1) translateY(0);}
+            100% { opacity: 0; transform: scale(2.5) translateY(-120px);}
+        }
+        @keyframes explode-center {
+            0% {
+                opacity: 1;
+                transform: scale(1) translate(0, 0);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(2.2) translate(var(--tx), var(--ty));
+            }
+        }
     </style>
 </head>
 <body>
@@ -230,14 +241,13 @@
         <input type="text" class="input" id="username" placeholder="Username" autocomplete="off" />
         <input type="password" class="input" id="password" placeholder="Password" autocomplete="off" />
         <div id="resetRow">
-            <span id="changePwd">reset your password?</span>
-            <span id="noMsg">Nope</span>
+            <span id="changePwd">Forgot Your Password?</span>
         </div>
         <button class="btn" id="loginBtn">Login</button>
         <div id="customBox" class="custom-message" style="display:none;"></div>
-        <button id="pressMeBtn" class="btn" style="display:none; margin-top:16px;">Press me</button>
+        <button id="pressMeBtn" class="btn" style="display:none; margin-top:16px;">↪ Press Me ↩</button>
     </div>
-    <div id="finalLoveMsg" style="display:none; font-size:1.5em; font-weight:bold;">i love you</div>
+    <div id="finalLoveMsg" style="display:none; font-size:1.5em; font-weight:bold;">I Love You</div>
     <div id="blackOverlay">
         <div id="blackOverlayText">Nope</div>
     </div>
@@ -256,34 +266,44 @@
         const finalLoveMsg = document.getElementById('finalLoveMsg');
 
         const messages = [
-            "since day one, i wanted to know you more",
-            "because you were the puddle of water in a barren desert",
-            "and i was the thirsty wanderer",
-            "i just knew that i found the love of my life",
-            "and maybe we had some ups and downs ",
-            "but it was never an ending",
-            "and maybe i cant propose to you",
-            "but i can...?",
+            "Since Day One, I Wanted To Know You More",
+            "You Were The Puddle Of Water In A Barren Desert",
+            "And I Was The Thirsty Wanderer",
+            "I Just Knew That I Found The Love Of My Life",
+            "And Maybe We Had Some Ups And Downs ",
+            "But It Was Never An Ending",
+            "And Maybe I Can't Propose To You",
+            "But I Can...?",
+            "Wait And Find Out ;)",
         ];
         let msgIndex = 0;
+
+        function showWithFade(el) {
+            el.style.display = "";
+            el.classList.remove('fade-in');
+            // Force reflow to restart animation
+            void el.offsetWidth;
+            el.classList.add('fade-in');
+        }
 
         loginBtn.addEventListener('click', () => {
             const username = usernameInput.value.trim();
             const password = passwordInput.value;
             if (username === "dodo" && password === "iloveyou") {
                 customBox.textContent = "Welcome back bunny";
-                customBox.style.display = "block";
+                showWithFade(customBox);
                 usernameInput.style.display = "none";
                 passwordInput.style.display = "none";
                 loginBtn.style.display = "none";
                 resetRow.style.display = "none";
                 displayText.textContent = "";
                 pressMeBtn.style.display = "inline-block";
+                showWithFade(pressMeBtn);
                 msgIndex = 0;
                 dodoAudio.play();
             } else {
                 customBox.textContent = "Try Again please";
-                customBox.style.display = "block";
+                showWithFade(customBox);
                 pressMeBtn.style.display = "none";
             }
         });
@@ -292,32 +312,52 @@
             if (msgIndex < messages.length) {
                 const message = messages[msgIndex];
                 customBox.textContent = message;
-                customBox.style.display = "block";
+                showWithFade(customBox);
 
-                // Reset any previous adjustments
                 customBox.style.width = '100%';
                 document.querySelector('.container').style.width = 'auto';
 
-                // Wait for the next frame to ensure the DOM has updated
                 requestAnimationFrame(() => {
-                    // Calculate the required width and apply it to the container
                     const requiredWidth = Math.min(customBox.scrollWidth + 40, window.innerWidth * 0.95);
                     document.querySelector('.container').style.width = `${requiredWidth}px`;
                 });
 
-                msgIndex++;
-                if (msgIndex === messages.length) {
-                    // Wait for next click to show "i love you"
-                    pressMeBtn.onclick = () => {
-                        document.querySelector('.container').remove();
-                        finalLoveMsg.style.display = "block";
-                        // Center the message vertically and horizontally
-                        document.body.style.display = "flex";
-                        document.body.style.flexDirection = "column";
-                        document.body.style.justifyContent = "center";
-                        document.body.style.alignItems = "center";
-                    };
+                // Trigger explosion when the last message appears
+                if (message.toLowerCase().includes("wait and find out")) {
+                    starExplosion();
                 }
+
+                msgIndex++;
+            } else if (msgIndex === messages.length) {
+                // Show the final message and remove the container
+                document.querySelector('.container').remove();
+                finalLoveMsg.style.display = "block";
+                finalLoveMsg.textContent = "";
+                finalLoveMsg.style.background = "none";
+                finalLoveMsg.style.boxShadow = "none";
+                finalLoveMsg.style.borderRadius = "0";
+                finalLoveMsg.style.padding = "0";
+                finalLoveMsg.style.border = "none";
+                finalLoveMsg.style.textAlign = "center";
+                finalLoveMsg.style.color = "#39ff14";
+                finalLoveMsg.style.textShadow = "0 2px 12px #39ff14, 0 0px 2px #000";
+                document.body.style.display = "flex";
+                document.body.style.flexDirection = "column";
+                document.body.style.justifyContent = "center";
+                document.body.style.alignItems = "center";
+
+                // Typewriter effect
+                const msg = "i love you <3";
+                let i = 0;
+                function typeLetter() {
+                    finalLoveMsg.innerHTML = msg.slice(0, i + 1);
+                    i++;
+                    if (i < msg.length) {
+                        setTimeout(typeLetter, 90);
+                    }
+                }
+                typeLetter();
+                msgIndex++; // Prevents this block from running again
             }
         });
 
@@ -344,6 +384,29 @@
         setInterval(() => {
             for (let i = 0; i < 2; i++) createHeart();
         }, 150);
+
+        function starExplosion() {
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            for (let i = 0; i < 40; i++) {
+                const star = document.createElement('span');
+                star.className = 'heart';
+                star.style.left = `${centerX}px`;
+                star.style.top = `${centerY}px`;
+                star.style.fontSize = (10 + Math.random() * 10) + 'px';
+                star.style.position = 'fixed';
+                const angle = Math.random() * 2 * Math.PI;
+                const distance = 120 + Math.random() * 180;
+                const x = Math.cos(angle) * distance;
+                const y = Math.sin(angle) * distance;
+                star.style.animation = `explode-center 1.5s cubic-bezier(.5,1.8,.5,1) forwards`;
+                star.style.setProperty('--tx', `${x}px`);
+                star.style.setProperty('--ty', `${y}px`);
+                star.innerHTML = `⭐`;
+                document.body.appendChild(star);
+                setTimeout(() => star.remove(), 1500);
+            }
+        }
     </script>
 </body>
 </html>
