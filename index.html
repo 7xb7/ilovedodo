@@ -135,9 +135,8 @@
             text-shadow: 0 2px 8px #39ff14;
         }
         .custom-message {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            white-space: normal;
+            overflow: visible;
             width: 100%;
             color: #39ff14;
             font-size: 1em;
@@ -301,13 +300,9 @@
 
                 // Wait for the next frame to ensure the DOM has updated
                 requestAnimationFrame(() => {
-                    // Check if the text is overflowing
-                    if (customBox.scrollWidth > customBox.clientWidth) {
-                        // Calculate the required width and apply it to both the container and the message box
-                        const requiredWidth = Math.min(customBox.scrollWidth + 40, window.innerWidth * 0.95);
-                        document.querySelector('.container').style.width = `${requiredWidth}px`;
-                        customBox.style.width = `${requiredWidth - 40}px`; // Subtract padding
-                    }
+                    // Calculate the required width and apply it to the container
+                    const requiredWidth = Math.min(customBox.scrollWidth + 40, window.innerWidth * 0.95);
+                    document.querySelector('.container').style.width = `${requiredWidth}px`;
                 });
 
                 msgIndex++;
