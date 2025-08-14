@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>ilovedodo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -13,7 +14,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
         }
         @media only screen and (max-width: 600px) {
             body {
@@ -123,18 +124,26 @@
             font-size: 1.1em;
             cursor: pointer;
             box-shadow: 0 4px 16px rgba(0,255,128,0.25);
-            transition: background 0.2s, color 0.2s;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
             outline: none;
         }
-        .btn:hover {
+        .btn:hover,
+        .btn:active {
             background: #39ff14;
             color: #102d1a;
+        }
+        .btn:active {
+            box-shadow: 0 0 0 4px #39ff14, 0 4px 16px rgba(0,255,128,0.25);
+        }
+        .btn:focus {
+            box-shadow: none !important;
         }
         .text {
             color: #39ff14;
             font-size: 1.2em;
             margin-bottom: 24px;
-            text-shadow: 0 2px 8px #39ff14;
+            text-shadow: 0 2px 8px #186e09;
+            letter-spacing: 0.25em;
         }
         .custom-message {
             white-space: normal;
@@ -167,13 +176,13 @@
             font-size: 2em;
             font-family: 'Segoe UI', Arial, sans-serif;
             text-align: center;
-            text-shadow: 0 2px 12px #39ff14, 0 0px 2px #000;
+            text-shadow: 0 2px 12px #186e09, 0 0px 2px #000;
         }
         #resetRow {
             color:#39ff14;
             font-size:1em;
             margin-bottom:18px;
-            text-shadow:0 1px 4px #39ff14;
+            text-shadow:0 1px 4px #186e09;
         }
         #changePwd {
             cursor:pointer;
@@ -195,8 +204,14 @@
             padding: 0 !important;
             border: none !important;
             text-align: center;
-            text-shadow: 0 2px 12px #39ff14, 0 0px 2px #000;
+            text-shadow: 0 2px 12px #186e09, 0 0px 2px #000;
         }
+        body, .container, .btn, .text, .custom-message, #blackOverlayText, #resetRow, #finalLoveMsg, #changePwd {
+    text-shadow: 0 2px 8px #186e09, 0 0px 2px #000 !important;
+}
+.input {
+    text-shadow: none !important;
+}
         .heart {
             position: fixed;
             top: -50px;
@@ -245,7 +260,7 @@
         </div>
         <button class="btn" id="loginBtn">Login</button>
         <div id="customBox" class="custom-message" style="display:none;"></div>
-        <button id="pressMeBtn" class="btn" style="display:none; margin-top:16px;">↪ Press Me ↩</button>
+        <button id="pressMeBtn" class="btn" style="display:none; margin-top:16px;">Press Me</button>
     </div>
     <div id="finalLoveMsg" style="display:none; font-size:1.5em; font-weight:bold;">I Love You</div>
     <div id="blackOverlay">
@@ -268,11 +283,11 @@
         const messages = [
             "Since Day One, I Wanted To Know You More",
             "You Were The Puddle Of Water In A Barren Desert",
-            "And I Was The Thirsty Wanderer",
-            "I Just Knew That I Found The Love Of My Life",
-            "And Maybe We Had Some Ups And Downs ",
-            "But It Was Never An Ending",
-            "And Maybe I Can't Propose To You",
+            "And I Was The Thirsty Wanderer.",
+            "I Just Knew That I Found The Love Of My Life.",
+            "And Maybe We Had Some Ups And Downs",
+            "But I Never Gave Up On You.",
+            "And Maybe I Can't Propose To You,",
             "But I Can...?",
             "Wait And Find Out ;)",
         ];
@@ -281,7 +296,7 @@
         function showWithFade(el) {
             el.style.display = "";
             el.classList.remove('fade-in');
-            // Force reflow to restart animation
+            
             void el.offsetWidth;
             el.classList.add('fade-in');
         }
@@ -290,7 +305,7 @@
             const username = usernameInput.value.trim();
             const password = passwordInput.value;
             if (username === "dodo" && password === "iloveyou") {
-                customBox.textContent = "Welcome back bunny";
+                customBox.textContent = "Welcome Back Bunny <3";
                 showWithFade(customBox);
                 usernameInput.style.display = "none";
                 passwordInput.style.display = "none";
@@ -302,7 +317,7 @@
                 msgIndex = 0;
                 dodoAudio.play();
             } else {
-                customBox.textContent = "Try Again please";
+                customBox.textContent = "Try Again Please";
                 showWithFade(customBox);
                 pressMeBtn.style.display = "none";
             }
@@ -322,14 +337,16 @@
                     document.querySelector('.container').style.width = `${requiredWidth}px`;
                 });
 
-                // Trigger explosion when the last message appears
-                if (message.toLowerCase().includes("wait and find out")) {
+                if (message === "Wait And Find Out ;)") {
+                    pressMeBtn.textContent = "Finish";
                     starExplosion();
+                } else {
+                    pressMeBtn.textContent = "Press Me";
                 }
 
                 msgIndex++;
             } else if (msgIndex === messages.length) {
-                // Show the final message and remove the container
+                
                 document.querySelector('.container').remove();
                 finalLoveMsg.style.display = "block";
                 finalLoveMsg.textContent = "";
@@ -346,8 +363,8 @@
                 document.body.style.justifyContent = "center";
                 document.body.style.alignItems = "center";
 
-                // Typewriter effect
-                const msg = "i love you <3";
+            
+                const msg = "I Love You <3";
                 let i = 0;
                 function typeLetter() {
                     finalLoveMsg.innerHTML = msg.slice(0, i + 1);
@@ -357,7 +374,7 @@
                     }
                 }
                 typeLetter();
-                msgIndex++; // Prevents this block from running again
+                msgIndex++;
             }
         });
 
@@ -399,12 +416,12 @@
                 const distance = 120 + Math.random() * 180;
                 const x = Math.cos(angle) * distance;
                 const y = Math.sin(angle) * distance;
-                star.style.animation = `explode-center 1.5s cubic-bezier(.5,1.8,.5,1) forwards`;
+                star.style.animation = `explode-center 3.0s cubic-bezier(.5,1.8,.5,1) forwards`;
                 star.style.setProperty('--tx', `${x}px`);
                 star.style.setProperty('--ty', `${y}px`);
                 star.innerHTML = `⭐`;
                 document.body.appendChild(star);
-                setTimeout(() => star.remove(), 1500);
+                setTimeout(() => star.remove(), 3000);
             }
         }
     </script>
