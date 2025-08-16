@@ -410,26 +410,26 @@
                 const poemLines = [
 
 "Grow Back Your Sharpest Teeth You Know My Desire",
-"I Was In Love With The Thought, That We Were In Love With Each Other",
 "Go Ahead And Wrap Your Arms Around Me",
-"You Might Be The One To Take Away The Pain And Let My Mind Go Quiet",
-"Nothing Else Is Quite The Same As How I Feel When I'm At Your Side",
-"The Vicious Cycle Was Over The Moment You Smiled At Me",
+"You Might Be The One To Take Away\nThe Pain And Let My Mind Go Quiet",
+"Nothing Else Is Quite The Same\nAs How I Feel When I'm At Your Side",
+"The Vicious Cycle Was Over\nThe Moment You Smiled At Me",
 "You've Got Your Hooks In Me",
 "I Can See You In My Fate",
-"You've Got My Body Flesh And Bone",
-"I Would Be Lying If I Told You That, I Didn't Wish That I Could Be Your Man",
-"Are You The Method In My Madness? Are You The Glory In My Wrath?",
-"If It's Blood That You Want From Me You Can Empty My Arteries",
-"You've Got Me Talking In My Sleep As If You're Conquering My Dreams",
-"And You Were More Than Just Somebody I Was Destined To Meet",
-"The Only Good Girl On This Side Of The Moon",
-"If You Wanna Give Then Give Me All What You Can Give",
-"You Know You Hypnotize Me Always?",
 "Won't You Come And Dance In The Dark With Me?",
+"You've Got My Body Flesh And Bone",
+"I Would Be Lying If I Told You That\nI Didn't Wish That I Could Be Your Man",
+"Are You The Method In My Madness?\nAre You The Glory In My Wrath?",
+"If It's Blood That You Want From Me\nYou Can Empty My Arteries",
+"You've Got Me Talking In My Sleep\nAs If You're Conquering My Dreams",
+"And You Were More Than Just Somebody\nI Was Destined To Meet",
+"The Only Good Girl On This Side Of The Moon",
+"I Was In Love With The Thought\nThat We Were In Love With Each Other",
+"If You Wanna Give\nThen Give Me All That You Can Give",
+"You Know You Hypnotize Me Always?",
 "Show Me What You Are I Am Desperate To Know",
 "I'm Still Full Of The Love You Want",
-"You've Got Diamonds For Teeth My Love, So Take A Bite Of Me",
+"You've Got Diamonds For Teeth My Love\nSo Take A Bite Of Me",
 "My Arms Belong Around You",
 "She's Perfectly Misaligned",
 "She's An Undiscovered Element",
@@ -438,15 +438,15 @@
 "We Tangle Endlessly",
 "You've Become The Voice In My Head",
 "Welcome Me In",
-"Let's Search The Skies For Awhile You And I, Collide Like Two Stars For A While, You And I",
+"Let's Search The Skies For Awhile You And I\nCollide Like Two Stars For A While, You And I",
 "Will You Lay In My Arms?",
-"And I Know As You Collapse Into Me, This Is The Start Of Something",
-"You Must Be Crazy If You Think That I Will Give Up The Game",
+"And I Know As You Collapse Into Me\nThis Is The Start Of Something",
+"You Must Be Crazy If You Think That\nI Will Give Up The Game",
 "I Know That You Can See, That You Will Be Mine",
 "You Made Me Yearn For Your Embrace",
-"And You Know I'll Be Yours When The Moment Is Perfect",
-"With My Love As Your Garden, So Won't You Fall For Me?",
-"And I'll Live Like I've Got Missing Limbs For You",
+"And You Know I'll Be Yours\nWhen The Moment Is Perfect",
+"With My Love As Your Garden\nSo Won't You Fall For Me?",
+"And I'll Live Like I've Got Missing Limbs\nFor You",
 
                 ];
 
@@ -464,7 +464,7 @@
                     }
 
                     const floatText = document.createElement('div');
-                    floatText.textContent = poemLines[currentLine];
+                    floatText.innerHTML = poemLines[currentLine].replace(/\n/g, "<br>");
                     floatText.className = 'floating-poem';
                     floatText.style.position = 'fixed';
                     floatText.style.color = '#39ff14';
@@ -472,11 +472,11 @@
                     floatText.style.pointerEvents = 'none';
                     floatText.style.opacity = '0';
                     floatText.style.zIndex = '10002';
-                    floatText.style.whiteSpace = 'nowrap';
                     floatText.style.textShadow = '0 8px 32px #186e09, 0 0px 16px #000, 0 0px 2px #39ff14';
                     floatText.style.transition = 'opacity 1.2s cubic-bezier(.5,1.8,.5,1), box-shadow 0.5s';
                     floatText.style.left = "50%";
                     floatText.style.transform = "translateX(-50%)";
+                    floatText.style.textAlign = "center"; // <-- Always centered
                     const loveRect = finalLoveMsg.getBoundingClientRect();
                     const top = loveRect.bottom + 24;
                     floatText.style.top = `${top}px`;
