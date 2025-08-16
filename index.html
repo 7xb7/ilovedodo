@@ -5,6 +5,7 @@
     <title>ilovedodo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -103,7 +104,6 @@
             transition: width 0.3s ease;
             position: relative;
         }
-
         .input {
             width: 90%;
             padding: 12px;
@@ -207,37 +207,34 @@
             text-shadow: 0 2px 12px #186e09, 0 0px 2px #000;
         }
         body, .container, .btn, .text, .custom-message, #blackOverlayText, #resetRow, #finalLoveMsg, #changePwd {
-    text-shadow: 0 2px 8px #186e09, 0 0px 2px #000 !important;
-}
-.input {
-    text-shadow: none !important;
-}
-.btn, button, input[type="button"], input[type="submit"] {
-    -webkit-tap-highlight-color: transparent;
-    tap-highlight-color: transparent;
-    -webkit-appearance: none;
-    appearance: none;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    user-select: none;
-    touch-action: manipulation;
-    outline: none !important;
- 
-    box-shadow: 0 4px 16px rgba(0,255,128,0.25) !important;
-}
-
-@media (hover: none) and (pointer: coarse) {
-    .btn, .btn:hover, .btn:active, .btn:focus, .btn:focus-visible {
-        background: #102d1a !important;
-        color: #39ff14 !important;
-        box-shadow: 0 4px 16px rgba(0,255,128,0.25) !important;
-    }
-}
-
-.btn:focus {
-    outline: none !important;
-    box-shadow: none !important;
-}
+            text-shadow: 0 2px 8px #186e09, 0 0px 2px #000 !important;
+        }
+        .input {
+            text-shadow: none !important;
+        }
+        .btn, button, input[type="button"], input[type="submit"] {
+            -webkit-tap-highlight-color: transparent;
+            tap-highlight-color: transparent;
+            -webkit-appearance: none;
+            appearance: none;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+            outline: none !important;
+            box-shadow: 0 4px 16px rgba(0,255,128,0.25) !important;
+        }
+        @media (hover: none) and (pointer: coarse) {
+            .btn, .btn:hover, .btn:active, .btn:focus, .btn:focus-visible {
+                background: #102d1a !important;
+                color: #39ff14 !important;
+                box-shadow: 0 4px 16px rgba(0,255,128,0.25) !important;
+            }
+        }
+        .btn:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
         .heart {
             position: fixed;
             top: -50px;
@@ -245,7 +242,6 @@
             z-index: 99999;
             animation: fall linear;
             text-shadow: none !important;
-
         }
         @keyframes fall {
             to {
@@ -289,6 +285,9 @@
         <button class="btn" id="loginBtn">Login</button>
         <div id="customBox" class="custom-message" style="display:none;"></div>
         <button id="pressMeBtn" class="btn" style="display:none; margin-top:16px;">Press Me</button>
+        <div id="sleepTokenQuote" style="color:#39ff14; font-family:'Poppins', 'Segoe UI', Arial, sans-serif; font-size:1em; opacity:0.5; margin-bottom:38px; margin-top:38px; text-align:center; text-shadow:0 2px 8px #186e09, 0 0px 2px #000;">
+            You Must Be Crazy If You Think That I Will Give Up The Game<br>- Sleep Token
+        </div>
     </div>
     <div id="finalLoveMsg" style="display:none; font-size:1.5em; font-weight:bold;">I Love You</div>
     <div id="blackOverlay">
@@ -332,7 +331,7 @@
         loginBtn.addEventListener('click', () => {
             const username = usernameInput.value.trim();
             const password = passwordInput.value;
-            if (username === "dodo" && password === "iloveyou") {
+            if (username === "dodo" && password === "ilovetoto") {
                 customBox.textContent = "Welcome Back Bunny <3";
                 showWithFade(customBox);
                 usernameInput.style.display = "none";
@@ -344,6 +343,9 @@
                 showWithFade(pressMeBtn);
                 msgIndex = 0;
                 dodoAudio.play();
+                // Remove the Sleep Token quote after successful login
+                const sleepTokenQuote = document.getElementById('sleepTokenQuote');
+                if (sleepTokenQuote) sleepTokenQuote.remove();
             } else {
                 customBox.textContent = "Try Again Please";
                 showWithFade(customBox);
@@ -374,34 +376,139 @@
 
                 msgIndex++;
             } else if (msgIndex === messages.length) {
-                
                 document.querySelector('.container').remove();
                 finalLoveMsg.style.display = "block";
-                finalLoveMsg.textContent = "";
-                finalLoveMsg.style.background = "none";
-                finalLoveMsg.style.boxShadow = "none";
-                finalLoveMsg.style.borderRadius = "0";
-                finalLoveMsg.style.padding = "0";
-                finalLoveMsg.style.border = "none";
-                finalLoveMsg.style.textAlign = "center";
+                finalLoveMsg.textContent = "I Love You <3";
+                finalLoveMsg.style.position = "fixed";
+                finalLoveMsg.style.top = "50%";
+                finalLoveMsg.style.left = "50%";
+                finalLoveMsg.style.transform = "translate(-50%, -50%)";
+                finalLoveMsg.style.background = "rgba(10, 31, 20, 0.85)";
+                finalLoveMsg.style.borderRadius = "20px";
+                finalLoveMsg.style.padding = "24px 32px";
+                finalLoveMsg.style.boxShadow = "0 8px 32px 0 rgba(0, 255, 128, 0.37)";
                 finalLoveMsg.style.color = "#39ff14";
-                finalLoveMsg.style.textShadow = "0 2px 12px #39ff14, 0 0px 2px #000";
-                document.body.style.display = "flex";
-                document.body.style.flexDirection = "column";
-                document.body.style.justifyContent = "center";
-                document.body.style.alignItems = "center";
+                finalLoveMsg.style.fontFamily = "'Poppins', 'Segoe UI', Arial, sans-serif";
+                finalLoveMsg.style.fontWeight = "600";
+                finalLoveMsg.style.fontSize = "2.5em";
+                finalLoveMsg.style.zIndex = "10001";
+                finalLoveMsg.style.textShadow = "0 6px 24px #186e09, 0 0px 12px #000, 0 0px 2px #39ff14";
+                finalLoveMsg.style.letterSpacing = "0.08em";
+                finalLoveMsg.style.opacity = "0";
+                finalLoveMsg.style.transition = "opacity 1.5s cubic-bezier(.5,1.8,.5,1)";
+                setTimeout(() => {
+                    finalLoveMsg.style.opacity = "1";
+                }, 100);
 
-            
-                const msg = "I Love You <3";
-                let i = 0;
-                function typeLetter() {
-                    finalLoveMsg.innerHTML = msg.slice(0, i + 1);
-                    i++;
-                    if (i < msg.length) {
-                        setTimeout(typeLetter, 90);
+                // Use a more readable font
+                const fontFamily = "'Poppins', 'Segoe UI', Arial, sans-serif";
+
+                const poemLines = [
+
+"Grow Back Your Sharpest Teeth You Know My Desire",
+"I Was In Love With The Thought, That We Were In Love With Each Other",
+"Go Ahead And Wrap Your Arms Around Me",
+"You Might Be The One To Take Away The Pain And Let My Mind Go Quiet",
+"Nothing Else Is Quite The Same As How I Feel When I'm At Your Side",
+"The Vicious Cycle Was Over The Moment You Smiled At Me",
+"You've Got Your Hooks In Me",
+"I Can See You In My Fate",
+"You've Got My Body Flesh And Bone",
+"I Would Be Lying If I Told You That, I Didn't Wish That I Could Be Your Man",
+"Are You The Method In My Madness? Are You The Glory In My Wrath?",
+"If It's Blood That You Want From Me You Can Empty My Arteries",
+"You've Got Me Talking In My Sleep As If You're Conquering My Dreams",
+"And You Were More Than Just Somebody I Was Destined To Meet",
+"The Only Good Girl On This Side Of The Moon",
+"If You Wanna Give Then Give Me All What You Can Give",
+"You Know You Hypnotize Me Always?",
+"Won't You Come And Dance In The Dark With Me?",
+"Show Me What You Are I Am Desperate To Know",
+"I'm Still Full Of The Love You Want",
+"You've Got Diamonds For Teeth My Love, So Take A Bite Of Me",
+"My Arms Belong Around You",
+"She's Perfectly Misaligned",
+"She's An Undiscovered Element",
+"Drag Me Under Again, Deep Into Your Love",
+"Burry Me To The Sound Of Your Name",
+"We Tangle Endlessly",
+"You've Become The Voice In My Head",
+"Welcome Me In",
+"Let's Search The Skies For Awhile You And I, Collide Like Two Stars For A While, You And I",
+"Will You Lay In My Arms?",
+"And I Know As You Collapse Into Me, This Is The Start Of Something",
+"You Must Be Crazy If You Think That I Will Give Up The Game",
+"I Know That You Can See, That You Will Be Mine",
+"You Made Me Yearn For Your Embrace",
+"And You Know I'll Be Yours When The Moment Is Perfect",
+"With My Love As Your Garden, So Won't You Fall For Me?",
+"And I'll Live Like I've Got Missing Limbs For You",
+
+                ];
+
+                let currentLine = 0;
+
+                function showNextLine() {
+                    // Remove previous line if exists
+                    const prev = document.querySelector('.floating-poem');
+                    if (prev) prev.remove();
+
+                    if (currentLine >= poemLines.length) {
+                        // Fade out the I Love You text after all lines
+                        setTimeout(() => {
+                            finalLoveMsg.style.opacity = "0";
+                        }, 1800);
+                        return;
                     }
+
+                    const floatText = document.createElement('div');
+                    floatText.textContent = poemLines[currentLine];
+                    floatText.className = 'floating-poem';
+                    floatText.style.position = 'fixed';
+                    floatText.style.fontSize = '1.3em'; // a little smaller
+                    floatText.style.color = '#39ff14';
+                    floatText.style.fontFamily = fontFamily;
+                    floatText.style.pointerEvents = 'none';
+                    floatText.style.opacity = '0';
+                    floatText.style.zIndex = '10002';
+                    floatText.style.whiteSpace = 'nowrap';
+                    floatText.style.textShadow = '0 8px 32px #186e09, 0 0px 16px #000, 0 0px 2px #39ff14';
+                    floatText.style.transition = 'opacity 1.2s cubic-bezier(.5,1.8,.5,1), box-shadow 0.5s';
+
+                    // Centered under "I Love You"
+                    floatText.style.left = "50%";
+                    floatText.style.transform = "translateX(-50%)";
+                    // Calculate top position under I Love You
+                    // Get the position and height of finalLoveMsg
+                    const loveRect = finalLoveMsg.getBoundingClientRect();
+                    const top = loveRect.bottom + 24; // 24px below
+                    floatText.style.top = `${top}px`;
+
+                    // Add a glowing border for extra fanciness
+                    floatText.style.borderRadius = "18px";
+                    floatText.style.padding = "8px 20px";
+                    floatText.style.background = "rgba(10, 31, 20, 0.72)";
+                    floatText.style.boxShadow = "0 0 32px 8px #39ff1455, 0 8px 32px 0 #186e09";
+
+                    document.body.appendChild(floatText);
+
+                    // Fade in
+                    setTimeout(() => {
+                        floatText.style.opacity = '1';
+                    }, 100);
+
+                    // Fade out after 2.5s, then show next line
+                    setTimeout(() => {
+                        floatText.style.opacity = '0';
+                        setTimeout(() => {
+                            floatText.remove();
+                            currentLine++;
+                            showNextLine();
+                        }, 1200); // Wait for fade out
+                    }, 2500);
                 }
-                typeLetter();
+
+                showNextLine();
                 msgIndex++;
             }
         });
@@ -460,4 +567,5 @@
     </script>
 </body>
 </html>
+
 
