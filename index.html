@@ -385,17 +385,21 @@
                 finalLoveMsg.style.transform = "translate(-50%, -50%)";
                 finalLoveMsg.style.background = "rgba(10, 31, 20, 0.85)";
                 finalLoveMsg.style.borderRadius = "20px";
-                finalLoveMsg.style.padding = "24px 32px";
                 finalLoveMsg.style.boxShadow = "0 8px 32px 0 rgba(0, 255, 128, 0.37)";
                 finalLoveMsg.style.color = "#39ff14";
                 finalLoveMsg.style.fontFamily = "'Poppins', 'Segoe UI', Arial, sans-serif";
                 finalLoveMsg.style.fontWeight = "600";
-                finalLoveMsg.style.fontSize = "2.5em";
                 finalLoveMsg.style.zIndex = "10001";
                 finalLoveMsg.style.textShadow = "0 6px 24px #186e09, 0 0px 12px #000, 0 0px 2px #39ff14";
                 finalLoveMsg.style.letterSpacing = "0.08em";
                 finalLoveMsg.style.opacity = "0";
                 finalLoveMsg.style.transition = "opacity 1.5s cubic-bezier(.5,1.8,.5,1)";
+                finalLoveMsg.style.whiteSpace = "nowrap";
+                finalLoveMsg.style.overflow = "hidden";
+                finalLoveMsg.style.maxWidth = window.innerWidth <= 600 ? "95vw" : "60vw";
+                finalLoveMsg.style.fontSize = window.innerWidth <= 600 ? "1em" : "2.5em";
+                finalLoveMsg.style.padding = window.innerWidth <= 600 ? "10px 8px" : "24px 32px";
+
                 setTimeout(() => {
                     finalLoveMsg.style.opacity = "1";
                 }, 100);
@@ -483,10 +487,10 @@
 
                     // Responsive font size for phones
                     if (window.innerWidth <= 600) {
-                        floatText.style.fontSize = '0.95em';
-                        floatText.style.maxWidth = '90vw';
+                        floatText.style.fontSize = '0.75em';
+                        floatText.style.maxWidth = '95vw';
                     } else {
-                        floatText.style.fontSize = '1.3em';
+                        floatText.style.fontSize = '1.1em';
                         floatText.style.maxWidth = '60vw';
                     }
 
@@ -565,6 +569,5 @@
     </script>
 </body>
 </html>
-
 
 
