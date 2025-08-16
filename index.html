@@ -285,8 +285,8 @@
         <button class="btn" id="loginBtn">Login</button>
         <div id="customBox" class="custom-message" style="display:none;"></div>
         <button id="pressMeBtn" class="btn" style="display:none; margin-top:16px;">Press Me</button>
-        <div id="sleepTokenQuote" style="color:#39ff14; font-family:'Poppins', 'Segoe UI', Arial, sans-serif; font-size:1em; opacity:0.5; margin-bottom:38px; margin-top:38px; text-align:center; text-shadow:0 2px 8px #186e09, 0 0px 2px #000;">
-            You Must Be Crazy If You Think That I Will Give Up The Game<br>- Sleep Token
+        <div id="sleepTokenQuote" style="color:#39ff14; font-family:'Poppins', 'Segoe UI', Arial, sans-serif; font-size:0.85em; opacity:0.5; margin-bottom:24px; margin-top:18px; text-align:center; text-shadow:0 2px 8px #186e09, 0 0px 2px #000;">
+            You Must Be Crazy If You Think That I'll Give Up The Game<br>- Sleep Token
         </div>
     </div>
     <div id="finalLoveMsg" style="display:none; font-size:1.5em; font-weight:bold;">I Love You</div>
@@ -449,12 +449,10 @@
                 let currentLine = 0;
 
                 function showNextLine() {
-                    // Remove previous line if exists
                     const prev = document.querySelector('.floating-poem');
                     if (prev) prev.remove();
 
                     if (currentLine >= poemLines.length) {
-                        // Fade out the I Love You text after all lines
                         setTimeout(() => {
                             finalLoveMsg.style.opacity = "0";
                         }, 1800);
@@ -465,7 +463,6 @@
                     floatText.textContent = poemLines[currentLine];
                     floatText.className = 'floating-poem';
                     floatText.style.position = 'fixed';
-                    floatText.style.fontSize = '1.3em'; // a little smaller
                     floatText.style.color = '#39ff14';
                     floatText.style.fontFamily = fontFamily;
                     floatText.style.pointerEvents = 'none';
@@ -474,37 +471,38 @@
                     floatText.style.whiteSpace = 'nowrap';
                     floatText.style.textShadow = '0 8px 32px #186e09, 0 0px 16px #000, 0 0px 2px #39ff14';
                     floatText.style.transition = 'opacity 1.2s cubic-bezier(.5,1.8,.5,1), box-shadow 0.5s';
-
-                    // Centered under "I Love You"
                     floatText.style.left = "50%";
                     floatText.style.transform = "translateX(-50%)";
-                    // Calculate top position under I Love You
-                    // Get the position and height of finalLoveMsg
                     const loveRect = finalLoveMsg.getBoundingClientRect();
-                    const top = loveRect.bottom + 24; // 24px below
+                    const top = loveRect.bottom + 24;
                     floatText.style.top = `${top}px`;
-
-                    // Add a glowing border for extra fanciness
                     floatText.style.borderRadius = "18px";
                     floatText.style.padding = "8px 20px";
                     floatText.style.background = "rgba(10, 31, 20, 0.72)";
                     floatText.style.boxShadow = "0 0 32px 8px #39ff1455, 0 8px 32px 0 #186e09";
 
+                    // Responsive font size for phones
+                    if (window.innerWidth <= 600) {
+                        floatText.style.fontSize = '0.95em';
+                        floatText.style.maxWidth = '90vw';
+                    } else {
+                        floatText.style.fontSize = '1.3em';
+                        floatText.style.maxWidth = '60vw';
+                    }
+
                     document.body.appendChild(floatText);
 
-                    // Fade in
                     setTimeout(() => {
                         floatText.style.opacity = '1';
                     }, 100);
 
-                    // Fade out after 2.5s, then show next line
                     setTimeout(() => {
                         floatText.style.opacity = '0';
                         setTimeout(() => {
                             floatText.remove();
                             currentLine++;
                             showNextLine();
-                        }, 1200); // Wait for fade out
+                        }, 1200);
                     }, 2500);
                 }
 
@@ -567,5 +565,6 @@
     </script>
 </body>
 </html>
+
 
 
