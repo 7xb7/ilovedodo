@@ -476,7 +476,7 @@
                     floatText.style.transition = 'opacity 1.2s cubic-bezier(.5,1.8,.5,1), box-shadow 0.5s';
                     floatText.style.left = "50%";
                     floatText.style.transform = "translateX(-50%)";
-                    floatText.style.textAlign = "center"; // <-- Always centered
+                    floatText.style.textAlign = "center";
                     const loveRect = finalLoveMsg.getBoundingClientRect();
                     const top = loveRect.bottom + 24;
                     floatText.style.top = `${top}px`;
@@ -485,14 +485,12 @@
                     floatText.style.background = "rgba(10, 31, 20, 0.72)";
                     floatText.style.boxShadow = "0 0 32px 8px #39ff1455, 0 8px 32px 0 #186e09";
 
-                    // Responsive font size for phones
-                    if (window.innerWidth <= 600) {
-                        floatText.style.fontSize = '0.75em';
-                        floatText.style.maxWidth = '100vw';
-                    } else {
-                        floatText.style.fontSize = '1.1em';
-                        floatText.style.maxWidth = '60vw';
-                    }
+                    // Make the box flexible and prevent forced line breaks
+                    floatText.style.display = "inline-block";
+                    floatText.style.whiteSpace = "nowrap";
+                    floatText.style.overflowX = "auto";
+                    floatText.style.maxWidth = window.innerWidth <= 600 ? "98vw" : "80vw";
+                    floatText.style.fontSize = window.innerWidth <= 600 ? "0.75em" : "1.1em";
 
                     document.body.appendChild(floatText);
 
