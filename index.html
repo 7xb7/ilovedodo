@@ -291,7 +291,7 @@
     </div>
     <div id="finalLoveMsg" style="display:none; font-size:1.5em; font-weight:bold;">I Love You</div>
     <div id="blackOverlay">
-        <div id="blackOverlayText">Sorry Not My Problem </div>
+        <div id="blackOverlayText">Sorry Not My Problem</div>
     </div>
     <audio id="dodoAudio" src="dodo.mp3"></audio>
     <script>
@@ -343,11 +343,11 @@
                 showWithFade(pressMeBtn);
                 msgIndex = 0;
                 dodoAudio.play();
-                // Remove the Sleep Token quote after successful login
+            
                 const sleepTokenQuote = document.getElementById('sleepTokenQuote');
                 if (sleepTokenQuote) sleepTokenQuote.remove();
             } else {
-                customBox.textContent = "Try Again Please";
+                customBox.textContent = "Try Again";
                 showWithFade(customBox);
                 pressMeBtn.style.display = "none";
             }
@@ -404,44 +404,44 @@
                     finalLoveMsg.style.opacity = "1";
                 }, 100);
 
-                // Use a more readable font
+             
                 const fontFamily = "'Poppins', 'Segoe UI', Arial, sans-serif";
 
                 const poemLines = [
 
 "Grow Back Your Sharpest Teeth You Know My Desire",
-"Go Ahead And Wrap Your Arms Around Me",
 "You Might Be The One To Take Away\nThe Pain And Let My Mind Go Quiet",
+"She's An Undiscovered Element",
 "Nothing Else Is Quite The Same\nAs How I Feel When I'm At Your Side",
 "The Vicious Cycle Was Over\nThe Moment You Smiled At Me",
-"You've Got Your Hooks In Me",
-"I Can See You In My Fate",
 "Won't You Come And Dance In The Dark With Me?",
 "You've Got My Body Flesh And Bone",
 "I Would Be Lying If I Told You That\nI Didn't Wish That I Could Be Your Man",
+"I Can See You In My Fate",
 "Are You The Method In My Madness?\nAre You The Glory In My Wrath?",
-"If It's Blood That You Want From Me\nYou Can Empty My Arteries",
+"You've Got Your Hooks In Me",
 "You've Got Me Talking In My Sleep\nAs If You're Conquering My Dreams",
 "And You Were More Than Just Somebody\nI Was Destined To Meet",
 "The Only Good Girl On This Side Of The Moon",
 "I Was In Love With The Thought\nThat We Were In Love With Each Other",
 "If You Wanna Give\nThen Give Me All That You Can Give",
 "You Know You Hypnotize Me Always?",
+"Go Ahead And Wrap Your Arms Around Me",
 "Show Me What You Are I Am Desperate To Know",
 "I'm Still Full Of The Love You Want",
+"If It's Blood That You Want From Me\nYou Can Empty My Arteries",
 "You've Got Diamonds For Teeth My Love\nSo Take A Bite Of Me",
-"My Arms Belong Around You",
 "She's Perfectly Misaligned",
-"She's An Undiscovered Element",
 "Drag Me Under Again, Deep Into Your Love",
 "Burry Me To The Sound Of Your Name",
+"My Arms Belong Around You",
 "We Tangle Endlessly",
 "You've Become The Voice In My Head",
-"Welcome Me In",
 "Let's Search The Skies For Awhile You And I\nCollide Like Two Stars For A While, You And I",
 "Will You Lay In My Arms?",
 "And I Know As You Collapse Into Me\nThis Is The Start Of Something",
-"You Must Be Crazy If You Think That\nI Will Give Up The Game",
+"Welcome Me In",
+"You Must Be Crazy If You Think That\n I'll give in so easily",
 "I Know That You Can See, That You Will Be Mine",
 "You Made Me Yearn For Your Embrace",
 "And You Know I'll Be Yours\nWhen The Moment Is Perfect",
@@ -457,9 +457,6 @@
                     if (prev) prev.remove();
 
                     if (currentLine >= poemLines.length) {
-                        setTimeout(() => {
-                            finalLoveMsg.style.opacity = "0";
-                        }, 1800);
                         return;
                     }
 
@@ -475,17 +472,15 @@
                     floatText.style.textShadow = '0 8px 32px #186e09, 0 0px 16px #000, 0 0px 2px #39ff14';
                     floatText.style.transition = 'opacity 1.2s cubic-bezier(.5,1.8,.5,1), box-shadow 0.5s';
                     floatText.style.left = "50%";
-                    floatText.style.transform = "translateX(-50%)";
+                    floatText.style.top = "65%";
+                    floatText.style.transform = "translate(-50%, -50%)";
                     floatText.style.textAlign = "center";
-                    const loveRect = finalLoveMsg.getBoundingClientRect();
-                    const top = loveRect.bottom + 24;
-                    floatText.style.top = `${top}px`;
                     floatText.style.borderRadius = "18px";
                     floatText.style.padding = "8px 10px";
                     floatText.style.background = "rgba(10, 31, 20, 0.72)";
                     floatText.style.boxShadow = "0 0 32px 8px #39ff1455, 0 8px 32px 0 #186e09";
 
-                    // Make the box flexible and prevent forced line breaks
+                    
                     floatText.style.display = "inline-block";
                     floatText.style.whiteSpace = "nowrap";
                     floatText.style.overflowX = "auto";
@@ -505,7 +500,7 @@
                             currentLine++;
                             showNextLine();
                         }, 1200);
-                    }, 2500);
+                    }, 2750); 
                 }
 
                 showNextLine();
